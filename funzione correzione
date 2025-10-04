@@ -1,0 +1,62 @@
+stima iterativa del moltiplicatore di Lagrange** associato al vincolo `g(f)` nella soluzione ottimale `(f*, α*)`.
+Ricorda le condizioni di Karush-Kuhn-Tucker (KKT) per il problema originale:
+`min Costo(f)`
+soggetto a `g(f) ≤ 0`
+
+Alla soluzione ottima `f*`, deve esistere un moltiplicatore `α*` tale che:
+1.  `∇Costo(f*) + α* ∇g(f*) = 0`  (Stazionarietà del Lagrangiano)
+2.  `α* * g(f*) = 0`             (Complementarità)
+3.  `g(f*) ≤ 0`                  (Ammissibilità primale)
+4.  `α* ≥ 0`                    (Ammissibilità duale)
+
+L'algoritmo non conosce `f*` e soprattutto non conosce `α*`. **Lo scopo dell'intero algoritmo è trovare la coppia `(f*, α*)` che soddisfa questo sistema di equazioni.**
+
+All'inizio (iterazione `k=0`), non abbiamo idea di quale sia il valore corretto di `α*`, quindi partiamo con una stima, tipicamente `α_0 = 0`.
+
+### 2. Come si calcola `α`? La Meccanica dell'Aggiornamento
+
+Il valore di `α` non è fissato, ma viene **aggiornato ad ogni iterazione** dopo aver calcolato il nuovo flusso `f_{k+1}`. La regola di aggiornamento è:
+
+`α_{k+1} = max(0, α_k + ρ * g(f_{k+1}))`
+
+Analizziamo questa formula pezzo per pezzo, perché è qui che si trova la "magia":
+*   `g(f_{k+1})`: È il **feedback**. Dopo aver calcolato `f_{k+1}`, controlliamo lo stato del vincolo. Questo valore ci dice se siamo dentro la regione ammissibile (`g < 0`), sul confine (`g = 0`), o fuori (`g > 0`).
+*   `ρ * g(f_{k+1})`: È il **termine di correzione**. `ρ` è un passo di grandezza fisso. Se abbiamo violato il vincolo (`g > 0`), il termine è positivo. Se lo abbiamo rispettato (`g ≤ 0`), il termine è negativo o nullo.
+*   `α_k + ρ * g(f_{k+1})`: Aggiorniamo la nostra stima precedente.
+    *   **Se il vincolo è stato violato (`g(f_{k+1}) > 0`)**: Il valore di `α` **aumenta**. La logica è: "La mia stima del prezzo `α_k` era troppo bassa. Il vincolo è stato violato, quindi nella prossima iterazione devo dargli più peso, devo 'pagare' di più per violarlo".
+    *   **Se il vincolo è stato rispettato (`g(f_{k+1}) ≤ 0`)**: Il valore di `α` **diminuisce o rimane uguale**. La logica è: "La mia stima del prezzo `α_k` era adeguata o forse anche troppo alta. Non c'è bisogno di aumentarla".
+*   `max(0, ...)`: Questo è fondamentale. Dalle condizioni KKT (punto 4), sappiamo che il moltiplicatore per un vincolo `≤ 0` non può mai essere negativo. Questa operazione `max` semplicemente impone una condizione di base della teoria dell'ottimizzazione.
+
+### 3. Perché Aggiungere `α*g(f)` Funziona? La Matematica dietro la "Guida"
+
+Questo è il punto cruciale. Consideriamo la funzione obiettivo del sub-problema che risolviamo ad ogni iterazione:
+`L_ρ(f, α_k) = Costo(f) + α_k*g(f) + (ρ/2)*g(f)^2` (per semplicità, assumo `g(f)>0` quindi il `max` sparisce).
+
+Quando minimizziamo questa funzione rispetto a `f`, la sua condizione di ottimalità del primo ordine (ponendo il gradiente a zero) è:
+`∇Costo(f_{k+1}) + α_k*∇g(f_{k+1}) + ρ*g(f_{k+1})*∇g(f_{k+1}) = 0`
+
+Raccogliamo `∇g(f_{k+1})`:
+`∇Costo(f_{k+1}) + [α_k + ρ*g(f_{k+1})] * ∇g(f_{k+1}) = 0`
+
+Ora guarda attentamente il termine tra parentesi quadre. È **esattamente la formula di aggiornamento per `α_{k+1}`** (prima del `max`). Quindi, la condizione di ottimalità del sub-problema può essere riscritta come:
+
+`∇Costo(f_{k+1}) + α_{k+1} * ∇g(f_{k+1}) ≈ 0`
+
+**Questo è il motivo per cui il metodo è superiore.** L'algoritmo è costruito in modo tale che il punto `f_{k+1}` che trova **tende a soddisfare la condizione di stazionarietà KKT (punto 1) usando il moltiplicatore dell'iterazione successiva `α_{k+1}`**.
+
+Quando l'algoritmo converge, significa che `f_{k+1} ≈ f_k` e `α_{k+1} ≈ α_k`. In quel punto di convergenza `(f*, α*)`, avremo:
+*   `∇Costo(f*) + α* ∇g(f*) = 0` (dalla condizione di ottimalità del sub-problema)
+*   `g(f*) ≤ 0` (perché se `g>0`, la penalità `ρ*g` spingerebbe la soluzione a cambiare)
+*   `α* ≥ 0` (imposto dalla `max`)
+*   `α* * g(f*) = 0` (segue dalla regola di aggiornamento: se `g(f*)<0`, l'aggiornamento spinge `α` verso 0; se `g(f*)=0`, `α` si stabilizza)
+
+L'algoritmo è un **risolutore iterativo per l'intero sistema di equazioni KKT**.
+
+### Riepilogo Tecnico: Penalità vs. Lagrangiano Aumentato
+
+| Metodo | Obiettivo del Sub-problema | Come Forza l'Ottimalità |
+| :--- | :--- | :--- |
+| **Penalità (Semplice)** | `Costo(f) + (ρ/2)g(f)²` | Cerca un `f*` tale che `g(f*) ≤ 0`. Per forzare `g(f*)` ad essere esattamente `0` (se il vincolo è attivo), richiede che `ρ` tenda all'infinito. È un approccio **primale**: si concentra solo sulla variabile `f` e ignora `α`. |
+| **Lagrangiano Aumentato (Completo)** | `Costo(f) + α_k g(f) + (ρ/2)g(f)²` | Cerca **simultaneamente** una coppia `(f*, α*)` che soddisfi `∇Costo + α∇g = 0` E `g(f) ≤ 0`. È un approccio **primale-duale**. Il termine `α_k g(f)` guida `f` a soddisfare la stazionarietà, mentre il termine `ρ g(f)²` garantisce che `f` non violi troppo il vincolo durante il processo. Per questo `ρ` non deve andare all'infinito. |
+
+Il termine `α*g(f)` non è una "scatola nera". È un pezzo fondamentale di un meccanismo iterativo progettato per trovare la soluzione al sistema di condizioni di ottimalità KKT, cosa che il metodo di penalità puro fa in modo molto più indiretto, inefficiente e numericamente instabile.

@@ -1,0 +1,100 @@
+1) 
+Introdurre e sviscerare i problemi di flusso di costo minimo 
+
+2) 
+introdurre variazioni dei problemi di flusso minimo (shortest route, albero minimo, assegnamento)
+
+3) 
+introdurre equazioni variazionali 
+
+4) 
+variazioni dei problemi di costo minimo con equaz di costo che sono variazionali 
+
+5) 
+metodi di risoluzione di sta merda 
+§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+
+
+2. Ottimizzazione classica
+
+Problemi di ottimizzazione non vincolata.
+
+Problemi vincolati: moltiplicatori di Lagrange.
+
+Condizioni KKT.
+
+Dualità lagrangiana (weak/strong).
+
+3. Teoria dei grafi e flussi
+
+Rappresentazioni di grafi.
+
+Algoritmi di cammino minimo (Dijkstra, Bellman-Ford, Floyd-Warshall).
+
+Problema del flusso massimo (Ford-Fulkerson, Edmonds-Karp).
+
+Problema del flusso di costo minimo (successive shortest path, network simplex).
+
+Variazioni:
+
+Albero minimo (Prim, Kruskal).
+
+Assegnamento (Hungarian).
+
+Shortest route in varianti.
+
+4. Analisi funzionale e strumenti variazionali
+
+Spazi di Hilbert e Banach.
+
+Spazi di Sobolev e derivate deboli.
+
+Forma variazionale di PDE.
+
+Principio dei minimi di Dirichlet.
+
+Lemma di Lax-Milgram (esistenza/ unicità).
+
+Condizioni di coercività e continuità.
+
+5. Applicazioni variazionali
+
+Problemi di trasporto continuo (Monge-Kantorovich, trasporto ottimo).
+
+Interpretazione dei flussi come minimi di funzionali di energia.
+
+Relazioni tra formulazioni discrete (reti) e continue (PDE variazionali).
+
+Collegamento fra shortest path / min cost flow e equazioni variazionali.
+
+6. Metodi numerici
+
+Metodi diretti (Gauss, QR, Cholesky).
+
+Metodi iterativi (Jacobi, Gauss-Seidel, gradiente coniugato).
+
+Ottimizzazione numerica:
+
+Gradient descent, Newton, Quasi-Newton.
+
+Simplex e network simplex.
+
+Interior point methods.
+
+Metodi per PDE:
+
+Differenze finite.
+
+Elementi finiti (Galerkin, FEM).
+
+Eventuale introduzione ai metodi spettrali.
+
+7. Strumenti computazionali
+
+Python (NumPy, SciPy, NetworkX).
+
+Solver di ottimizzazione (Gurobi, CPLEX, GLPK).
+
+Software FEM (FEniCS, FreeFEM).
+
+Vuoi che ti faccia anche una stima delle ore / settimane da dedicare a ciascun blocco per avere un piano realistico di studio prima della scrittura?

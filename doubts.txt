@@ -1,0 +1,19 @@
+4.1.1 davvero mappa in un altro vettore?? 
+che significa mappa in questo caso? un altro vettore prestavilito? non mi pare sensateo 
+
+4.3 punto 3 che senso ha citare il paper? 
+cuiriosa la parte sui costi ridotti, da decidere se tenerla o no 
+
+
+
+
+objective per il prossimo lavoro: 
+
+spulciare la teoria prima del flussso normale e paragonarlo a tesi per vedere se ci particolare
+
+
+trovare data su equazioni variazionali in generale magari roba figa, anche video 
+poi esaminare i metodi di risoluzione delle equazioni variazionali 
+
+
+poi mandare una mail al prof a fine giornata con tutti i dubbi su dove vuoi procedere 

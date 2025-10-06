@@ -17,3 +17,10 @@ poi esaminare i metodi di risoluzione delle equazioni variazionali
 
 
 poi mandare una mail al prof a fine giornata con tutti i dubbi su dove vuoi procedere 
+
+
+QUALI PROBLEMI PARTICOLARI? 
+
+NO assegnazione: non cambia con variazionali 
+NO albero copertura: non cambia con variazionali 
+NO percorso costo minimo: non cambia con variazionali 

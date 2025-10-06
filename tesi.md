@@ -129,9 +129,9 @@ Il modello generalizzato non cerca di minimizzare una funzione di costo totale, 
 
 Il problema di equilibrio del flusso di rete consiste nel trovare un flusso `f* ∈ K_f` tale che:
 
-`(c(f*), f - f*) ≥ 0`, per ogni `f ∈ K_f`
+`<c(f*), f - f*> ≥ 0`, per ogni `f ∈ K_f`
 
-dove `(a, b)` denota il prodotto scalare tra i vettori `a` e `b`.
+dove `<a, b>` denota il prodotto scalare tra i vettori `a` e `b`.
 
 **Interpretazione:** Questa condizione significa che, allo stato di equilibrio `f*`, qualsiasi deviazione infinitesimale verso un altro flusso ammissibile `f` non può portare a una diminuzione del costo. `f*` è un punto stazionario.
 
@@ -140,7 +140,7 @@ dove `(a, b)` denota il prodotto scalare tra i vettori `a` e `b`.
 Il modello MCFP standard è un caso particolare del modello VI.
 Se la funzione di costo `c(f)` è indipendente dal flusso, cioè `c(f) = c` (un vettore di costanti), allora l'inequazione variazionale diventa:
 
-`(c, f - f*) ≥ 0`  =>  `c^T f - c^T f* ≥ 0`  =>  `c^T f ≥ c^T f*`
+`<c, f - f*> ≥ 0`  =>  `c^T f - c^T f* ≥ 0`  =>  `c^T f ≥ c^T f*`
 
 Questa è esattamente la condizione di ottimalità per il problema di programmazione lineare:
 `min { c^T f | f ∈ K_f }`

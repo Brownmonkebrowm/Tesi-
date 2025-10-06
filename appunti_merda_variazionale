@@ -1,0 +1,40 @@
+optimization penalty method 
+
+prendi un sistema di 3 eq con 3 incognite 
+il metodo di sostituzione classico va a puttane quando ci sono eq complicatissime, diventa difficile isolare ogni singola variabile 
+
+
+basta trovare l area ammissibile, il poliedro ammissibilo 
+
+metti la funzione costo = a una variabile che cazzo ti pare (0) epr esempio 
+
+min {
+	+ costo(x) 
+	+ alfa1 * funz1(x)^2 
+	+ alfa2 * funz2(x)^2
+	+ alfa3 * funz3(x)^2
+}
+
+
+VARIATIONAL PERSPECTIVES ON MATHEMATICAL OPTIMIZATION YTVIDEO 
+
+ottimizzazione per funzioni smooth 
+
+poi aggiungi i constraints -> lagrange 
+
+1950s inequalities 
+
+linear programming 
+
+relu mappings in neural networks f(x) = max {0,x} capita molto spesso non smoothness che non puoi ignorare perche sono spesso i punti piu importanti 
+
+--cono tangentev direzioni dove non esci da un iniseme 
+
+figure non lisce non differenziabili ti levano la base del gradiente = 0. 
+-> SUBDIFFERENZIALITÀ 
+
+epigrapg y >= funzione instead of y = f(x)
+il cono tangente diventa un set di sottogradienti per un determinato punto 
+-> 0 deve essere nel set di sottotangenti per essere un minimo o massimo 
+
+EPICONVERGENZA DISCORSO DA CHIARIRE 
